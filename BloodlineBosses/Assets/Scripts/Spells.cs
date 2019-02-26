@@ -17,8 +17,7 @@ public class Spells : MonoBehaviour
     public PlayerStats PlayerStats;
 
     
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         
 
@@ -34,6 +33,7 @@ public class Spells : MonoBehaviour
             Spellbook.Add(fireball8);
         }
         
+        
 
         
 
@@ -47,14 +47,14 @@ public class Spells : MonoBehaviour
 
     public class Spell
     {
-        private string _name { get; set; }
-        private int _damage { get; set; }
-        private float _range { get; set; }
-        private int _meter { get; set; }
-        private int _aggro { get; set; }
-        private float _cooldown { get; set; }
-        private float _casttime { get; set; }
-        private bool _isMelee { get; set; }
+        public string _name { get; set; }
+        public int _damage { get; set; }
+        public float _range { get; set; }
+        public int _meter { get; set; }
+        public int _aggro { get; set; }
+        public float _cooldown { get; set; }
+        public float _casttime { get; set; }
+        public bool _isMelee { get; set; }
 
         public Spell(string name, int damage, float range, int meter, int aggro, float cooldown, float casttime, bool isMelee)
         {
