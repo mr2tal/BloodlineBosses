@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Spells : MonoBehaviour
 {
-    List<Spell> mageSpellbook = new List<Spell>();
-    Spell fireball1 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball2 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball3 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball4 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball5 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball6 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball7 = new Spell("Fireball", 10, 10f, 10);
-    Spell fireball8 = new Spell("Fireball", 10, 10f, 10);
+    public List<Spell> Spellbook = new List<Spell>();
+    Spell fireball1 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball2 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball3 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball4 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball5 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball6 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball7 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+    Spell fireball8 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
     public PlayerStats PlayerStats;
 
     
@@ -21,20 +21,17 @@ public class Spells : MonoBehaviour
     void Start()
     {
         
-        mageSpellbook.Add(fireball1);
-        mageSpellbook.Add(fireball2);
-        mageSpellbook.Add(fireball3);
-        mageSpellbook.Add(fireball4);
-        mageSpellbook.Add(fireball5);
-        mageSpellbook.Add(fireball6);
-        mageSpellbook.Add(fireball7);
-        mageSpellbook.Add(fireball8);
-
-        print(PlayerStats.player.Name);
 
         if (PlayerStats.player.Name == "Mage")
         {
-            PlayerStats.player.Spells = mageSpellbook;
+            Spellbook.Add(fireball1);
+            Spellbook.Add(fireball2);
+            Spellbook.Add(fireball3);
+            Spellbook.Add(fireball4);
+            Spellbook.Add(fireball5);
+            Spellbook.Add(fireball6);
+            Spellbook.Add(fireball7);
+            Spellbook.Add(fireball8);
         }
         
 
@@ -54,12 +51,21 @@ public class Spells : MonoBehaviour
         private int _damage { get; set; }
         private float _range { get; set; }
         private int _meter { get; set; }
-        public Spell(string name, int damage, float range, int meter)
+        private int _aggro { get; set; }
+        private float _cooldown { get; set; }
+        private float _casttime { get; set; }
+        private bool _isMelee { get; set; }
+
+        public Spell(string name, int damage, float range, int meter, int aggro, float cooldown, float casttime, bool isMelee)
         {
             _name = name;
             _damage = damage;
             _range = range;
             _meter = meter;
+            _aggro = aggro;
+            _cooldown = cooldown;
+            _casttime = casttime;
+            _isMelee = isMelee;
         }
     }
 }
