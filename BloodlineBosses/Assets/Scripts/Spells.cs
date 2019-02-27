@@ -5,26 +5,27 @@ using UnityEngine;
 
 public class Spells : MonoBehaviour
 {
+    
     public List<Spell> Spellbook = new List<Spell>();
-    Spell fireball1 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball2 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball3 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball4 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball5 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball6 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball7 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
-    Spell fireball8 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
     public PlayerStats PlayerStats;
 
     
     void Awake()
     {
         
+        Spell fireball1 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell frostbolt = new Spell("Frostbolt", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball3 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball4 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball5 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball6 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball7 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
+        Spell fireball8 = new Spell("Fireball", 10, 10f, 10, 5, 3f, 3f, false);
 
         if (PlayerStats.player.Name == "Mage")
         {
             Spellbook.Add(fireball1);
-            Spellbook.Add(fireball2);
+            Spellbook.Add(frostbolt);
             Spellbook.Add(fireball3);
             Spellbook.Add(fireball4);
             Spellbook.Add(fireball5);

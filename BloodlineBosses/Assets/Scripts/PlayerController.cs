@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     Vector3 directions;
-    public GameObject prefab;
     public static readonly Plane plane = new Plane(Vector3.up, Vector3.zero);
 
 
