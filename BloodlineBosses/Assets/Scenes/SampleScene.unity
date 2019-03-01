@@ -479,7 +479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  prefab: {fileID: 1408124835671680573, guid: 0f477fcbba1d00a4ca1915b73747a4fc, type: 3}
 --- !u!114 &1439032776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -505,6 +504,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerStats: {fileID: 1439032776}
+  Prefab: {fileID: 1408124835671680573, guid: 0f477fcbba1d00a4ca1915b73747a4fc, type: 3}
 --- !u!114 &1439032778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -518,3 +518,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerStats: {fileID: 1439032776}
+  Prefab: {fileID: 1408124835671680573, guid: 0f477fcbba1d00a4ca1915b73747a4fc, type: 3}
+  isCasting: 0
