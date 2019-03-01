@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class VectorMousePoint
 {
-    
+    //creates a vector3 where the mouse is on the screen
     public static Vector3 MousePoint()
     {
 

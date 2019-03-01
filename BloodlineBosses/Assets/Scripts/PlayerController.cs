@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     Vector3 directions;
-    public static readonly Plane plane = new Plane(Vector3.up, Vector3.zero);
+   // public static readonly Plane plane = new Plane(Vector3.up, Vector3.zero);
 
 
     // Start is called before the first frame update
@@ -23,12 +23,12 @@ public class PlayerController : MonoBehaviour
         Move();
 
     }
-
+    //moves the object in the direction determined times the movespeed times the deltatime
     private void Move()
     {
         this.transform.Translate(directions * moveSpeed * Time.deltaTime);
     }
-
+    //gets the input for controlling the character
     private void GetInput()
     {
         directions = Vector3.zero;
