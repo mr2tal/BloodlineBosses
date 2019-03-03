@@ -62,56 +62,56 @@ public class CastingSpell : MonoBehaviour
             {
                 if (currentCooldowns[0] <= 0)
                 {
-                    CastRequest(stats.player.Spells[0]._casttime, 0);
+                    CastRequest(stats.player.Spells[0]._spell._casttime, 0);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (currentCooldowns[1] <= 0)
                 {
-                    CastRequest(stats.player.Spells[1]._casttime, 1);
+                    CastRequest(stats.player.Spells[1]._spell._casttime, 1);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 if (currentCooldowns[2] <= 0)
                 {
-                    CastRequest(stats.player.Spells[2]._casttime, 2);
+                    CastRequest(stats.player.Spells[2]._spell._casttime, 2);
                 }
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (currentCooldowns[3] <= 0)
                 {
-                    CastRequest(stats.player.Spells[3]._casttime, 3);
+                    CastRequest(stats.player.Spells[3]._spell._casttime, 3);
                 }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 if (currentCooldowns[4] <= 0)
                 {
-                    CastRequest(stats.player.Spells[4]._casttime, 4);
+                    CastRequest(stats.player.Spells[4]._spell._casttime, 4);
                 }
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if (currentCooldowns[5] <= 0)
                 {
-                    CastRequest(stats.player.Spells[5]._casttime, 5);
+                    CastRequest(stats.player.Spells[5]._spell._casttime, 5);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 if (currentCooldowns[6] <= 0)
                 {
-                    CastRequest(stats.player.Spells[6]._casttime, 6);
+                    CastRequest(stats.player.Spells[6]._spell._casttime, 6);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 if (currentCooldowns[7] <= 0)
                 {
-                    CastRequest(stats.player.Spells[7]._casttime, 7);
+                    CastRequest(stats.player.Spells[7]._spell._casttime, 7);
                 }
             }
 
@@ -141,7 +141,7 @@ public class CastingSpell : MonoBehaviour
 
     void SetCurrentCooldown(int index)
     {
-        currentCooldowns[index] = currentCooldowns[index] + stats.player.Spells[index]._cooldown;
+        currentCooldowns[index] = currentCooldowns[index] + stats.player.Spells[index]._spell._cooldown;
     }
 
     //gets a casttime and index, sets the casting to true to avoid more castrequests
@@ -185,8 +185,18 @@ public class CastingSpell : MonoBehaviour
     // instantiates our projectile and sends parameters to the projectile
     void Shoot(int index)
     {
-        GameObject obj = Instantiate(stats.player.Spells[index]._Prefab, transform.position , Quaternion.LookRotation( VectorMousePoint.MousePoint() - this.transform.position));
-        print(stats.player.Spells[index]._name);
-        obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._owner, stats.player.Spells[index]._speed, stats.player.Spells[index]._damage, stats.player.Spells[index]._duration, stats.player.Spells[index]._meter, stats.player.Spells[index]._aggro);
+        if(stats.player.Spells[index]._archtype == "Projectile")
+        {
+            GameObject obj = Instantiate(stats.player.Spells[index]._spell._Prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+            print(stats.player.Spells[index]._spell._name);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
+        }
+        if (stats.player.Spells[index]._archtype == "Melee")
+        {
+            GameObject obj = Instantiate(stats.player.Spells[index]._spell._Prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+            print(stats.player.Spells[index]._spell._name);
+            obj.GetComponent<Melee>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._isCleave, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
+        }
+       
     }
 }
