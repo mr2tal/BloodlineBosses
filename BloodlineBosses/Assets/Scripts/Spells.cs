@@ -10,6 +10,7 @@ public class Spells : MonoBehaviour
     public Stats PlayerStats;
     public GameObject ProjectilePrefab;
     public GameObject MeleePrefab;
+    public GameObject AoePrefab;
 
     
     void Awake()
@@ -19,7 +20,7 @@ public class Spells : MonoBehaviour
         SpellType fireball1 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
         SpellType frostbolt = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Frostbolt",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
         SpellType meleeattack = new SpellType("Melee", new Spell(PlayerStats.player.Name, "meleeattack", 20, 0, 10, 1f, 1f, false, MeleePrefab));
-        SpellType fireball4 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
+        SpellType aoeattack = new SpellType("Aoe", new Spell(PlayerStats.player.Name, "Aoeattack", 5, 5, 5, 2f, 2f, 4f, AoePrefab));
         SpellType fireball5 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
         SpellType fireball6 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
         SpellType fireball7 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
@@ -30,14 +31,13 @@ public class Spells : MonoBehaviour
             Spellbook.Add(fireball1);
             Spellbook.Add(frostbolt);
             Spellbook.Add(meleeattack);
-            Spellbook.Add(fireball4);
+            Spellbook.Add(aoeattack);
             Spellbook.Add(fireball5);
             Spellbook.Add(fireball6);
             Spellbook.Add(fireball7);
             Spellbook.Add(fireball8);
 
             PlayerStats.player.Spells.AddRange(Spellbook);
-            print(PlayerStats.player.Spells);
         }
         
         
@@ -54,7 +54,7 @@ public class Spells : MonoBehaviour
 
     public class SpellType
     {
-       
+        //fields
         public string _archtype { get; set; }
         public Spell _spell { get; set; }
         //constructor
@@ -77,7 +77,7 @@ public class Spells : MonoBehaviour
         public int _aggro { get; set; }
         public float _cooldown { get; set; }
         public float _casttime { get; set; }
-        public GameObject _Prefab { get; set; }
+        public GameObject _prefab { get; set; }
 
         //projectile specific fields
         public float _duration { get; set; }
@@ -86,8 +86,15 @@ public class Spells : MonoBehaviour
         //melee specific fields
         public bool _isCleave { get; set; }
 
+        //aoe specific fields
+        public float _size { get; set; }
+
+
         //constructor for projectile type
-        public Spell(string owner, string name, int Speed, int damage, float duration, int meter, int aggro, float cooldown, float casttime, GameObject Prefab)
+        /// <summary>
+        /// Projectile constructor
+        /// </summary>
+        public Spell(string owner, string name, int Speed, int damage, float duration, int meter, int aggro, float cooldown, float casttime, GameObject prefab)
         {
             _owner = owner;
             _name = name;
@@ -98,11 +105,14 @@ public class Spells : MonoBehaviour
             _aggro = aggro;
             _cooldown = cooldown;
             _casttime = casttime;
-            _Prefab = Prefab;
+            _prefab = prefab;
         }
 
         //constructor for melee type
-        public Spell(string owner, string name, int damage, int meter, int aggro, float cooldown, float casttime,bool isCleave, GameObject Prefab)
+        /// <summary>
+        /// Melee constructor
+        /// </summary>
+        public Spell(string owner, string name, int damage, int meter, int aggro, float cooldown, float casttime,bool isCleave, GameObject prefab)
         {
             _owner = owner;
             _name = name;
@@ -111,8 +121,24 @@ public class Spells : MonoBehaviour
             _aggro = aggro;
             _cooldown = cooldown;
             _casttime = casttime;
-            _Prefab = Prefab;
+            _prefab = prefab;
             _isCleave = isCleave;
+        }
+        //constructor for aoe type
+        /// <summary>
+        /// Aoe constructor
+        /// </summary>
+        public Spell(string owner, string name, int damage, int meter, int aggro, float cooldown, float casttime, float size, GameObject prefab)
+        {
+            _owner = owner;
+            _name = name;
+            _damage = damage;
+            _meter = meter;
+            _aggro = aggro;
+            _cooldown = cooldown;
+            _casttime = casttime;
+            _size = size;
+            _prefab = prefab;
         }
 
     }

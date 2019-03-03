@@ -660,6 +660,8 @@ MonoBehaviour:
     type: 3}
   MeleePrefab: {fileID: 7127647071922005137, guid: cc669c1827a7f6e4384bb5369de88dc8,
     type: 3}
+  AoePrefab: {fileID: 3267571773222338594, guid: 0a14893286d95954c87e91cd23b55c85,
+    type: 3}
 --- !u!114 &1439032778
 MonoBehaviour:
   m_ObjectHideFlags: 0
