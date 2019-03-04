@@ -6,11 +6,12 @@ public class Projectile : MonoBehaviour
 {
     string _attacker;
     int _speed;
-    int _damage;
+    float _damage;
     float _duration;
     int _meter;
     int _aggro;
     bool _explodes;
+    float _size;
     float timeTravelled = 0f;
     GameObject _prefab;
     // Start is called before the first frame update
@@ -29,13 +30,18 @@ public class Projectile : MonoBehaviour
             timeTravelled = timeTravelled + Time.deltaTime;
         } else
         {
+            if (_explodes)
+            {
+                GameObject obj = Instantiate(_prefab, gameObject.transform.position, Quaternion.identity);
+                obj.GetComponent<Aoe>().RecieveParameters(_attacker, _damage, _meter, _aggro, _size);
+            }
             Destroy(this.gameObject);
         }
 
 
     }
     //the projectile recieves parameters from the attacker
-    public void RecieveParameters(string attacker, int speed, int damage, float duration, int meter, int aggro, bool explodes, GameObject prefab)
+    public void RecieveParameters(string attacker, int speed, float damage, float duration, int meter, int aggro, bool explodes,float size, GameObject prefab)
     {
         _attacker = attacker;
         _speed = speed;
@@ -44,6 +50,7 @@ public class Projectile : MonoBehaviour
         _meter = meter;
         _aggro = aggro;
         _explodes = explodes;
+        _size = size;
         _prefab = prefab;
 
     }
@@ -58,7 +65,7 @@ public class Projectile : MonoBehaviour
             {
                
                GameObject obj = Instantiate(_prefab, gameObject.transform.position, Quaternion.identity);
-                obj.GetComponent<Aoe>().RecieveParameters(_attacker, _damage, _meter, _aggro, 1f);
+                obj.GetComponent<Aoe>().RecieveParameters(_attacker, _damage, _meter, _aggro, _size);
                 Destroy(this.gameObject);
            
             }else

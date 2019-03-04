@@ -5,7 +5,7 @@ using UnityEngine;
 public class Aoe : MonoBehaviour
 {
     string _attacker;
-    int _damage;
+    float _damage;
     float _size;
     int _meter;
     int _aggro;
@@ -32,7 +32,7 @@ public class Aoe : MonoBehaviour
 
     }
     //the projectile recieves parameters from the attacker
-    public void RecieveParameters(string attacker, int damage, int meter, int aggro, float size)
+    public void RecieveParameters(string attacker, float damage, int meter, int aggro, float size)
     {
         _attacker = attacker;
         _damage = damage;
@@ -46,7 +46,7 @@ public class Aoe : MonoBehaviour
     // doesnt work
     public void SetSize()
     {
-        gameObject.transform.localScale.Scale(new Vector3(_size, 0, _size));
+        gameObject.transform.localScale.Set(_size,0f,_size);
     }
 
     // checks if the projectile collides with anyone

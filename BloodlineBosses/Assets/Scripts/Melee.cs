@@ -5,7 +5,7 @@ using UnityEngine;
 public class Melee : MonoBehaviour
 {
     string _attacker;
-    int _damage;
+    float _damage;
     bool _isCleave;
     int _meter;
     int _aggro;
@@ -33,7 +33,7 @@ public class Melee : MonoBehaviour
 
     }
     //the projectile recieves parameters from the attacker
-    public void RecieveParameters(string attacker, int damage, bool isCleave, int meter, int aggro)
+    public void RecieveParameters(string attacker, float damage, bool isCleave, int meter, int aggro)
     {
         _attacker = attacker;
         _damage = damage;
