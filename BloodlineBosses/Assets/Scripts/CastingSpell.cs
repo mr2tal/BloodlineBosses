@@ -50,7 +50,18 @@ public class CastingSpell : MonoBehaviour
         }
         //reducing cooldowns over Time.DeltaTime
         ReduceCooldowns();
+        
     }
+    //Cancel cast, removed for now
+    //void CancelCast()
+    //{
+    //    if (isCasting && ((Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) || Input.GetKeyDown(KeyCode.T)))
+    //    {
+    //        isCasting = false;
+    //        castTime = 0f;
+    //        timeCasting = 0f;
+    //    }
+    //}
 
     //checks if aint casting, and if a button is pressed, then does a cast request if allowed from the index on spells[x] from the players spellbook
     void CastInput()

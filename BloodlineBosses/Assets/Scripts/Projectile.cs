@@ -52,6 +52,7 @@ public class Projectile : MonoBehaviour
         {
             EnemyStats Stats = other.GetComponent<EnemyStats>();
             Stats.TakeDamage(_attacker ,other.name, _damage, _aggro);
+            Destroy(this.gameObject);
         }
     }
 }
