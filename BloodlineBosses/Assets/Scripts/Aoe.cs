@@ -42,6 +42,8 @@ public class Aoe : MonoBehaviour
         SetSize();
 
     }
+
+    // doesnt work
     public void SetSize()
     {
         gameObject.transform.localScale.Scale(new Vector3(_size, 0, _size));
@@ -53,8 +55,15 @@ public class Aoe : MonoBehaviour
         // if the projectile aint hitting its owner then execute
         if (other.name != _attacker)
         {
-            EnemyStats Stats = other.GetComponent<EnemyStats>();
-            Stats.TakeDamage(_attacker, other.name, _damage, _aggro);
+            EnemyStats EStats = other.GetComponent<EnemyStats>();
+            if (EStats == null)
+            {
+                return;
+            }
+            else
+            {
+                EStats.TakeDamage(_attacker, other.name, _damage, _aggro);
+            }
         }
     }
 }

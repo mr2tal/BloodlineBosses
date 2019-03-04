@@ -13,7 +13,7 @@ public class Stats : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        this.gameObject.name = player.Name;
     }
 
     // Update is called once per frame

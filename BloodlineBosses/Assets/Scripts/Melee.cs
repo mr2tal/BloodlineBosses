@@ -49,8 +49,15 @@ public class Melee : MonoBehaviour
         // if the projectile aint hitting its owner then execute
         if (other.name != _attacker)
         {
-            EnemyStats Stats = other.GetComponent<EnemyStats>();
-            Stats.TakeDamage(_attacker, other.name, _damage, _aggro);
+            EnemyStats EStats = other.GetComponent<EnemyStats>();
+            if (EStats == null)
+            {
+                return;
+            }else
+            {
+                EStats.TakeDamage(_attacker, other.name, _damage, _aggro);
+            }
+           
         }
     }
 }

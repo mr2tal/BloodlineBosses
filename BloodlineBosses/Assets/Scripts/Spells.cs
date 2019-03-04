@@ -17,14 +17,14 @@ public class Spells : MonoBehaviour
     {
         
         //creating spells
-        SpellType fireball1 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
-        SpellType frostbolt = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Frostbolt",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
+        SpellType fireball1 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, true, ProjectilePrefab, AoePrefab));
+        SpellType frostbolt = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Frostbolt",10, 10, 1f, 10, 5, 3f, 3f,false, ProjectilePrefab, null));
         SpellType meleeattack = new SpellType("Melee", new Spell(PlayerStats.player.Name, "meleeattack", 20, 0, 10, 1f, 1f, false, MeleePrefab));
         SpellType aoeattack = new SpellType("Aoe", new Spell(PlayerStats.player.Name, "Aoeattack", 5, 5, 5, 2f, 2f, 4f, AoePrefab));
-        SpellType fireball5 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
-        SpellType fireball6 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
-        SpellType fireball7 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
-        SpellType fireball8 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f, ProjectilePrefab));
+        SpellType fireball5 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f,false, ProjectilePrefab, null));
+        SpellType fireball6 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f,false, ProjectilePrefab, null));
+        SpellType fireball7 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f,false, ProjectilePrefab, null));
+        SpellType fireball8 = new SpellType("Projectile", new Spell(PlayerStats.player.Name, "Fireball",10, 10, 1f, 10, 5, 3f, 3f,false, ProjectilePrefab, null));
         //set spellbook
         if (PlayerStats.player.Roleclass == "Mage")
         {
@@ -78,10 +78,12 @@ public class Spells : MonoBehaviour
         public float _cooldown { get; set; }
         public float _casttime { get; set; }
         public GameObject _prefab { get; set; }
+        public GameObject _AoePrefab { get; set; }
 
         //projectile specific fields
         public float _duration { get; set; }
         public int _speed { get; set; }
+        public bool _explodes { get; set; }
 
         //melee specific fields
         public bool _isCleave { get; set; }
@@ -94,7 +96,7 @@ public class Spells : MonoBehaviour
         /// <summary>
         /// Projectile constructor
         /// </summary>
-        public Spell(string owner, string name, int Speed, int damage, float duration, int meter, int aggro, float cooldown, float casttime, GameObject prefab)
+        public Spell(string owner, string name, int Speed, int damage, float duration, int meter, int aggro, float cooldown, float casttime, bool explodes, GameObject prefab, GameObject AoePrefab)
         {
             _owner = owner;
             _name = name;
@@ -105,7 +107,9 @@ public class Spells : MonoBehaviour
             _aggro = aggro;
             _cooldown = cooldown;
             _casttime = casttime;
+            _explodes = explodes;
             _prefab = prefab;
+            _AoePrefab = AoePrefab;
         }
 
         //constructor for melee type

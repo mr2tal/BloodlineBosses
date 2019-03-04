@@ -200,7 +200,7 @@ public class CastingSpell : MonoBehaviour
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro,stats.player.Spells[index]._spell._explodes, stats.player.Spells[index]._spell._AoePrefab);
         }
         if (stats.player.Spells[index]._archtype == "Melee")
         {
