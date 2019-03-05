@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    private float modifier;
-    EStats enemy = new EStats("evil boss", 30f, 0, true);
+
+    EStats enemy = new EStats("evil boss", 30, 0, true);
     List<Aggro> aggroTable = new List<Aggro>();
     // Start is called before the first frame update
     void Start()
@@ -18,13 +18,12 @@ public class EnemyStats : MonoBehaviour
     {
 
     }
-    public void TakeDamage(string attacker, string hitTarget, float damage, int aggro)
+    public void TakeDamage(string attacker, string hitTarget, int damage, int aggro)
     {
         if (hitTarget == enemy.Owner)
         {
-            Stats obj = GameObject.Find(attacker).GetComponent<Stats>();
-            print("Attacker:" + attacker + ", damage:" + damage + ", amplify:" + obj.amplify + ", victim:" + hitTarget);
-            enemy.Hp = enemy.Hp - (damage * (obj.amplify + 1f));
+            print("Attacker:" + attacker + ", damage:" + damage + ", victim:" + hitTarget);
+            enemy.Hp = enemy.Hp - damage;
             AggroTable(attacker, aggro);
             if (enemy.Hp <= 0)
             {
@@ -67,12 +66,12 @@ public class EnemyStats : MonoBehaviour
         //field
         private string _owner;
         private string _name;
-        private float _hp;
+        private int _hp;
         private int _meter;
         private bool _isEnemy;
 
         //constructor
-        public EStats(string name, float hp, int meter, bool isEnemy)
+        public EStats(string name, int hp, int meter, bool isEnemy)
         {
             _name = name;
             _hp = hp;
@@ -91,7 +90,7 @@ public class EnemyStats : MonoBehaviour
             get { return _name; }
             set { _name = value; }
         }
-        public float Hp
+        public int Hp
         {
             get { return _hp; }
             set { _hp = value; }
