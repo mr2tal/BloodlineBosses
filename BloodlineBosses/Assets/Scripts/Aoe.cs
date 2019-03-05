@@ -5,7 +5,7 @@ using UnityEngine;
 public class Aoe : MonoBehaviour
 {
     string _attacker;
-    int _damage;
+    float _damage;
     float _size;
     int _meter;
     int _aggro;
@@ -32,7 +32,7 @@ public class Aoe : MonoBehaviour
 
     }
     //the projectile recieves parameters from the attacker
-    public void RecieveParameters(string attacker, int damage, int meter, int aggro, float size)
+    public void RecieveParameters(string attacker, float damage, int meter, int aggro, float size)
     {
         _attacker = attacker;
         _damage = damage;
@@ -53,8 +53,15 @@ public class Aoe : MonoBehaviour
         // if the projectile aint hitting its owner then execute
         if (other.name != _attacker)
         {
-            EnemyStats Stats = other.GetComponent<EnemyStats>();
-            Stats.TakeDamage(_attacker, other.name, _damage, _aggro);
+                
+            EnemyStats EStats = other.GetComponent<EnemyStats>();
+            if(EStats == null)
+            {
+                return;
+            }else
+            {
+                EStats.TakeDamage(_attacker, other.name, _damage, _aggro);
+            }
         }
     }
 }

@@ -140,7 +140,7 @@ public class CastingSpell : MonoBehaviour
                     CastRequest(stats.player.Spells[6]._spell._casttime, 6);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (currentCooldowns[7] <= 0)
                 {
@@ -238,7 +238,7 @@ public class CastingSpell : MonoBehaviour
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._explodes, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._aoePrefab);
         }
         if (stats.player.Spells[index]._archtype == "Melee")
         {
@@ -251,6 +251,10 @@ public class CastingSpell : MonoBehaviour
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, VectorMousePoint.MousePoint(), Quaternion.identity);
             print(stats.player.Spells[index]._spell._name);
             obj.GetComponent<Aoe>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._size);
+        }
+        if (stats.player.Spells[index]._archtype == "Buff")
+        {
+            stats.player.Buffs.Add(stats.player.Spells[index]._spell);
         }
        
     }
