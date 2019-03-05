@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
-    private float modifier;
-    EStats enemy = new EStats("evil boss", 30f, 0, true);
+    public float _modifiercounter;
+    public float _amplify;
+    public EStats enemy = new EStats("evil boss", 30f, 0, true, new List<Spells.Spell>());
     List<Aggro> aggroTable = new List<Aggro>();
     // Start is called before the first frame update
     void Start()
@@ -16,15 +17,36 @@ public class EnemyStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        BuffCalculation();
     }
-    public void TakeDamage(string attacker, string hitTarget, float damage, int aggro)
+
+    public void BuffCalculation()
+    {
+        for (int i = 0; i < enemy.Buffs.Count; i++)
+        {
+            _modifiercounter = _modifiercounter + enemy.Buffs[i]._amplify;
+            if (enemy.Buffs[i]._timeAlive < enemy.Buffs[i]._duration)
+            {
+                enemy.Buffs[i]._timeAlive = enemy.Buffs[i]._timeAlive + Time.deltaTime;
+            }
+            else
+            {
+                enemy.Buffs[i]._timeAlive = 0f;
+                enemy.Buffs.Remove(enemy.Buffs[i]);
+            }
+        }
+        _amplify = _modifiercounter;
+        _modifiercounter = 0f;
+    }
+    public void TakeDamage(string attacker, string hitTarget, float damage, float aggro)
     {
         if (hitTarget == enemy.Owner)
         {
             Stats stats = GameObject.Find(attacker).GetComponent<Stats>();
-            enemy.Hp = enemy.Hp - (damage * (stats._amplify + 1));
-            print("Attacker:" + attacker + ", damage:" + damage + ", amplify:" + stats._amplify + ", victim:" + hitTarget + "victim hp:" + enemy.Hp);
+            enemy.Hp = enemy.Hp - (damage * (stats._amplify + _amplify + 1));
+
+            // for testing purposes
+            print("Attacker:" + attacker + ", damage:" + damage + ", amplify:" + (stats._amplify + _amplify) + ", victim:" + hitTarget + "victim hp:" + enemy.Hp);
             AggroTable(attacker, aggro);
             if (enemy.Hp <= 0)
             {
@@ -33,7 +55,7 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-    public void AggroTable(string attacker, int aggro)
+    public void AggroTable(string attacker, float aggro)
     {
         foreach (Aggro a in aggroTable)
         {
@@ -52,9 +74,9 @@ public class EnemyStats : MonoBehaviour
     public class Aggro
     {
         public string _attacker { get; set; }
-        public int _aggro { get; set; }
+        public float _aggro { get; set; }
 
-        public Aggro(string attacker, int aggro)
+        public Aggro(string attacker, float aggro)
         {
             _attacker = attacker;
             _aggro = aggro;
@@ -70,14 +92,16 @@ public class EnemyStats : MonoBehaviour
         private float _hp;
         private int _meter;
         private bool _isEnemy;
+        private List<Spells.Spell> _buffs;
 
         //constructor
-        public EStats(string name, float hp, int meter, bool isEnemy)
+        public EStats(string name, float hp, int meter, bool isEnemy, List<Spells.Spell> buffs)
         {
             _name = name;
             _hp = hp;
             _meter = meter;
             _isEnemy = isEnemy;
+            _buffs = buffs;
         }
 
         //getset
@@ -105,6 +129,11 @@ public class EnemyStats : MonoBehaviour
         {
             get { return _isEnemy; }
             set { _isEnemy = value; }
+        }
+        public List<Spells.Spell> Buffs
+        {
+            get { return _buffs; }
+            set { _buffs = value; }
         }
     }
 

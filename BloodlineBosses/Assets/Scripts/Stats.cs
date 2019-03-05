@@ -21,13 +21,19 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        BuffCalculation();
+    }
+
+        public void BuffCalculation()
+    {
         for (int i = 0; i < player.Buffs.Count; i++)
-        { 
+        {
             _modifiercounter = _modifiercounter + player.Buffs[i]._amplify;
             if (player.Buffs[i]._timeAlive < player.Buffs[i]._duration)
             {
                 player.Buffs[i]._timeAlive = player.Buffs[i]._timeAlive + Time.deltaTime;
-            } else
+            }
+            else
             {
                 player.Buffs[i]._timeAlive = 0f;
                 player.Buffs.Remove(player.Buffs[i]);
@@ -36,8 +42,6 @@ public class Stats : MonoBehaviour
         _amplify = _modifiercounter;
         _modifiercounter = 0f;
     }
-
-
     // called when colliding with player object
     // TODO add a way the boss attacks back so this gets executed
     public void TakeDamage(string attacker, string hitTarget, float damage, int aggro)

@@ -9,11 +9,12 @@ public class Projectile : MonoBehaviour
     float _damage;
     float _duration;
     int _meter;
-    int _aggro;
+    float _aggro;
     bool _explodes;
     float _size;
     GameObject _prefab;
     float timeTravelled = 0f;
+    Spells.Spell _buff;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +37,7 @@ public class Projectile : MonoBehaviour
 
     }
     //the projectile recieves parameters from the attacker
-    public void RecieveParameters(string attacker, int speed, float damage, float duration, int meter, int aggro, bool explodes, float size, GameObject prefab)
+    public void RecieveParameters(string attacker, int speed, float damage, float duration, int meter, float aggro, bool explodes, float size, GameObject prefab, Spells.Spell buff)
     {
         _attacker = attacker;
         _speed = speed;
@@ -47,6 +48,7 @@ public class Projectile : MonoBehaviour
         _explodes = explodes;
         _size = size;
         _prefab = prefab;
+        _buff = buff;
 
     }
 
@@ -56,11 +58,16 @@ public class Projectile : MonoBehaviour
         // if the projectile aint hitting its owner then execute
         if (other.name != _attacker)
         {
+            if (_buff != null)
+            {
+                EnemyStats EStats = other.GetComponent<EnemyStats>();
+                EStats.enemy.Buffs.Add(_buff);
+            }
             if (_explodes == true)
             {
                
                GameObject obj = Instantiate(_prefab, gameObject.transform.position, Quaternion.identity);
-                obj.GetComponent<Aoe>().RecieveParameters(_attacker, _damage, _meter, _aggro, _size);
+                obj.GetComponent<Aoe>().RecieveParameters(_attacker, _damage, _meter, _aggro, _size, _buff);
                 Destroy(this.gameObject);
            
             }else

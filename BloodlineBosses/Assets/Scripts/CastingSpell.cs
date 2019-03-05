@@ -238,19 +238,19 @@ public class CastingSpell : MonoBehaviour
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._explodes, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._aoePrefab);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._explodes, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._aoePrefab, stats.player.Spells[index]._spell._buff);
         }
         if (stats.player.Spells[index]._archtype == "Melee")
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Melee>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._isCleave, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
+            obj.GetComponent<Melee>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._isCleave, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._buff);
         }
         if (stats.player.Spells[index]._archtype == "Aoe")
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, VectorMousePoint.MousePoint(), Quaternion.identity);
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Aoe>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._size);
+            obj.GetComponent<Aoe>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._buff);
         }
         if (stats.player.Spells[index]._archtype == "Buff")
         {
