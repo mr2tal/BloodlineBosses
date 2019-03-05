@@ -12,6 +12,7 @@ public class CastingSpell : MonoBehaviour
     private float castTime;
     private float globalCooldown = 1f;
 	public float currentCooldownMax = 0f;
+	public static float[] currentBuffTimes = new float[5];
     List<float> fullCooldowns = new List<float>();
     public List<float> currentCooldowns = new List<float>();
     private int index = 0;
@@ -255,6 +256,8 @@ public class CastingSpell : MonoBehaviour
         if (stats.player.Spells[index]._archtype == "Buff")
         {
             stats.player.Buffs.Add(stats.player.Spells[index]._spell);
+			GameObject.Find ("buffIcon").GetComponentInChildren<Image> ().fillAmount = 1;
+			currentBuffTimes[stats.player.Buffs.Count-1] = stats.player.Buffs[stats.player.Buffs.Count-1]._duration;
         }
        
     }
