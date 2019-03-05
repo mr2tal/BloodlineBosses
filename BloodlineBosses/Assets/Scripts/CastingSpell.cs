@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
+
 
 public class CastingSpell : MonoBehaviour
 {
@@ -8,15 +11,16 @@ public class CastingSpell : MonoBehaviour
     public bool isCasting = false;
     private float castTime;
     private float globalCooldown = 1f;
+	public float currentCooldownMax = 0f;
     List<float> fullCooldowns = new List<float>();
-    List<float> currentCooldowns = new List<float>();
+    public List<float> currentCooldowns = new List<float>();
     private int index = 0;
     private Stats stats;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-        stats = GetComponent<Stats>();
+		stats = GetComponent<Stats>();
         //fullCooldowns.Add(stats.player.Spells[0]._cooldown);
         //fullCooldowns.Add(stats.player.Spells[1]._cooldown);
         //fullCooldowns.Add(stats.player.Spells[2]._cooldown);
@@ -34,7 +38,6 @@ public class CastingSpell : MonoBehaviour
         currentCooldowns.Add(0);
         currentCooldowns.Add(0);
 
-
     }
 
     // Update is called once per frame
@@ -50,6 +53,25 @@ public class CastingSpell : MonoBehaviour
         }
         //reducing cooldowns over Time.DeltaTime
         ReduceCooldowns();
+		if (currentCooldowns[0] > 0) 
+		{
+			var colors = GameObject.Find("m1ButtonCD").GetComponent<Button> ().colors;
+			colors.normalColor = Color.red;
+			GameObject.Find("m1ButtonCD").GetComponent<Button> ().colors = colors;
+			string cdTXT;
+			cdTXT = currentCooldowns[0].ToString("0.00");
+			GameObject.Find("m1ButtonCD").GetComponentInChildren<Text> ().text = cdTXT;
+			GameObject.Find("TESTBUTTON").GetComponentInChildren<Image> ().fillAmount = (currentCooldowns[0] / currentCooldownMax);
+		}
+		else
+		{
+			var colors = GameObject.Find("m1ButtonCD").GetComponent<Button> ().colors;
+			colors.normalColor = Color.white;
+			GameObject.Find("m1ButtonCD").GetComponent<Button> ().colors = colors;
+			string cdTXT;
+			cdTXT = " ";
+			GameObject.Find("m1ButtonCD").GetComponentInChildren<Text> ().text = cdTXT;
+		}
         
     }
     //Cancel cast, removed for now
@@ -118,7 +140,7 @@ public class CastingSpell : MonoBehaviour
                     CastRequest(stats.player.Spells[6]._spell._casttime, 6);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 if (currentCooldowns[7] <= 0)
                 {
@@ -152,7 +174,9 @@ public class CastingSpell : MonoBehaviour
 
     void SetCurrentCooldown(int index)
     {
+		currentCooldownMax = 0f;
         currentCooldowns[index] = currentCooldowns[index] + stats.player.Spells[index]._spell._cooldown;
+		currentCooldownMax = currentCooldowns[index];
     }
 
     //gets a casttime and index, sets the casting to true to avoid more castrequests
@@ -166,11 +190,15 @@ public class CastingSpell : MonoBehaviour
         {
             if (currentCooldowns[i] < 0)
             {
+				currentCooldownMax = 0f;
                 currentCooldowns[i] = currentCooldowns[i] + globalCooldown;
+				currentCooldownMax = currentCooldowns[i];
             }
             else if (currentCooldowns[i] <= 1 && currentCooldowns[i] > 0)
             {
+				currentCooldownMax = 0f;
                 currentCooldowns[i] = globalCooldown;
+				currentCooldownMax = currentCooldowns[i];
             }
         }
 
@@ -181,6 +209,16 @@ public class CastingSpell : MonoBehaviour
         if (timeCasting < castTime)
         {
             timeCasting = timeCasting + Time.deltaTime;
+			Slider castBar;
+			GameObject temp = GameObject.Find("castBar");
+			castBar = temp.GetComponent<Slider>();
+			castBar.value = timeCasting / castTime;
+			if (castBar.value == 1) 
+			{
+				castBar.value = 0;
+			}
+
+
         }
         else
         {
@@ -200,7 +238,7 @@ public class CastingSpell : MonoBehaviour
         {
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
             print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro,stats.player.Spells[index]._spell._explodes,stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._AoePrefab);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro);
         }
         if (stats.player.Spells[index]._archtype == "Melee")
         {
@@ -213,17 +251,6 @@ public class CastingSpell : MonoBehaviour
             GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, VectorMousePoint.MousePoint(), Quaternion.identity);
             print(stats.player.Spells[index]._spell._name);
             obj.GetComponent<Aoe>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._size);
-        }
-        if (stats.player.Spells[index]._archtype == "Buff")
-        {
-            if(stats.player.Spells[index]._spell._spell == null)
-            {
-                stats.player.Buffs.Add(stats.player.Spells[index]._spell);
-            } else
-            {
-                return;
-            }
-
         }
        
     }
