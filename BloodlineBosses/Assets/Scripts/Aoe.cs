@@ -17,10 +17,13 @@ public class Aoe : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
+
+    /// <summary>
+    /// Update is called once per frame. Contains a duration checker, which counts the time the object has been alive, and moves/destroys the projectile
+    /// </summary>
     void Update()
     {
-        //duration checker, which counts the time the object has been alive, and moves/destroys the projectile
+
         if (timeAlive < _duration)
         {
             timeAlive = timeAlive + Time.deltaTime;
@@ -32,7 +35,16 @@ public class Aoe : MonoBehaviour
 
 
     }
-    //the projectile recieves parameters from the attacker
+    
+    /// <summary>
+    /// The projectile recieves parameters from the attacker
+    /// </summary>
+    /// <param name="attacker"></param>
+    /// <param name="damage"></param>
+    /// <param name="meter"></param>
+    /// <param name="aggro"></param>
+    /// <param name="size"></param>
+    /// <param name="buff"></param>
     public void RecieveParameters(string attacker, float damage, int meter, float aggro, float size, Spells.Spell buff)
     {
         _attacker = attacker;
@@ -49,7 +61,11 @@ public class Aoe : MonoBehaviour
         gameObject.transform.localScale.Scale(new Vector3(_size, 0, _size));
     }
 
-    // checks if the projectile collides with anyone
+    
+    /// <summary>
+    /// Checks if the projectile collides with anything
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         // if the projectile aint hitting its owner then execute
