@@ -14,7 +14,7 @@ public class CastingSpell : MonoBehaviour
 	public float currentCooldownMax = 0f;
 	public static float[] currentBuffTimes = new float[5];
     List<float> fullCooldowns = new List<float>();
-    public List<float> currentCooldowns = new List<float>();
+    private List<float> currentCooldowns = new List<float>();
     private int index = 0;
     private Stats stats;
 
@@ -22,14 +22,6 @@ public class CastingSpell : MonoBehaviour
     void Start()
     {
 		stats = GetComponent<Stats>();
-        //fullCooldowns.Add(stats.player.Spells[0]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[1]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[2]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[3]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[4]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[5]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[6]._cooldown);
-        //fullCooldowns.Add(stats.player.Spells[7]._cooldown);
         currentCooldowns.Add(0);
         currentCooldowns.Add(0);
         currentCooldowns.Add(0);
@@ -96,56 +88,56 @@ public class CastingSpell : MonoBehaviour
             {
                 if (currentCooldowns[0] <= 0)
                 {
-                    CastRequest(stats.player.Spells[0]._spell._casttime, 0);
+                    CastRequest(stats.player.Spells[0]._casttime, 0);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
                 if (currentCooldowns[1] <= 0)
                 {
-                    CastRequest(stats.player.Spells[1]._spell._casttime, 1);
+                    CastRequest(stats.player.Spells[1]._casttime, 1);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 if (currentCooldowns[2] <= 0)
                 {
-                    CastRequest(stats.player.Spells[2]._spell._casttime, 2);
+                    CastRequest(stats.player.Spells[2]._casttime, 2);
                 }
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (currentCooldowns[3] <= 0)
                 {
-                    CastRequest(stats.player.Spells[3]._spell._casttime, 3);
+                    CastRequest(stats.player.Spells[3]._casttime, 3);
                 }
             }
             if (Input.GetKeyDown(KeyCode.R))
             {
                 if (currentCooldowns[4] <= 0)
                 {
-                    CastRequest(stats.player.Spells[4]._spell._casttime, 4);
+                    CastRequest(stats.player.Spells[4]._casttime, 4);
                 }
             }
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if (currentCooldowns[5] <= 0)
                 {
-                    CastRequest(stats.player.Spells[5]._spell._casttime, 5);
+                    CastRequest(stats.player.Spells[5]._casttime, 5);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 if (currentCooldowns[6] <= 0)
                 {
-                    CastRequest(stats.player.Spells[6]._spell._casttime, 6);
+                    CastRequest(stats.player.Spells[6]._casttime, 6);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (currentCooldowns[7] <= 0)
                 {
-                    CastRequest(stats.player.Spells[7]._spell._casttime, 7);
+                    CastRequest(stats.player.Spells[7]._casttime, 7);
                 }
             }
 
@@ -176,7 +168,7 @@ public class CastingSpell : MonoBehaviour
     void SetCurrentCooldown(int index)
     {
 		currentCooldownMax = 0f;
-        currentCooldowns[index] = currentCooldowns[index] + stats.player.Spells[index]._spell._cooldown;
+        currentCooldowns[index] = currentCooldowns[index] + stats.player.Spells[index]._cooldown;
 		currentCooldownMax = currentCooldowns[index];
     }
 
@@ -235,27 +227,28 @@ public class CastingSpell : MonoBehaviour
     // instantiates our projectile and sends parameters to the projectile
     void Shoot(int index)
     {
-        if(stats.player.Spells[index]._archtype == "Projectile")
+        
+        if(stats.player.Spells[index]._archetype == "Projectile")
         {
-            GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
-            print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._speed, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._duration, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._explodes, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._aoePrefab, stats.player.Spells[index]._spell._buff);
+            GameObject obj = Instantiate(stats.player.Spells[index]._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+            print(stats.player.Spells[index]._name);
+            obj.GetComponent<Projectile>().RecieveParameters(stats.player.Name, stats.player.Spells[index]._speed, stats.player.Spells[index]._damage, stats.player.Spells[index]._duration, stats.player.Spells[index]._meter, stats.player.Spells[index]._aggro, stats.player.Spells[index]._explodes, stats.player.Spells[index]._size, stats.player.Spells[index]._aoePrefab, stats.player.Spells[index]._buff);
         }
-        if (stats.player.Spells[index]._archtype == "Melee")
+        if (stats.player.Spells[index]._archetype == "Melee")
         {
-            GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
-            print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Melee>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._isCleave, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._buff);
+            GameObject obj = Instantiate(stats.player.Spells[index]._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+            print(stats.player.Spells[index]._name);
+            obj.GetComponent<Melee>().RecieveParameters(stats.player.Name, stats.player.Spells[index]._damage, stats.player.Spells[index]._isCleave, stats.player.Spells[index]._meter, stats.player.Spells[index]._aggro, stats.player.Spells[index]._buff);
         }
-        if (stats.player.Spells[index]._archtype == "Aoe")
+        if (stats.player.Spells[index]._archetype == "Aoe")
         {
-            GameObject obj = Instantiate(stats.player.Spells[index]._spell._prefab, VectorMousePoint.MousePoint(), Quaternion.identity);
-            print(stats.player.Spells[index]._spell._name);
-            obj.GetComponent<Aoe>().RecieveParameters(stats.player.Spells[index]._spell._owner, stats.player.Spells[index]._spell._damage, stats.player.Spells[index]._spell._meter, stats.player.Spells[index]._spell._aggro, stats.player.Spells[index]._spell._size, stats.player.Spells[index]._spell._buff);
+            GameObject obj = Instantiate(stats.player.Spells[index]._prefab, VectorMousePoint.MousePoint(), Quaternion.identity);
+            print(stats.player.Spells[index]._name);
+            obj.GetComponent<Aoe>().RecieveParameters(stats.player.Name, stats.player.Spells[index]._damage, stats.player.Spells[index]._meter, stats.player.Spells[index]._aggro, stats.player.Spells[index]._size, stats.player.Spells[index]._buff);
         }
-        if (stats.player.Spells[index]._archtype == "Buff")
+        if (stats.player.Spells[index]._archetype == "Buff")
         {
-            stats.player.Buffs.Add(stats.player.Spells[index]._spell);
+            stats.player.Buffs.Add(stats.player.Spells[index]);
 			GameObject.Find ("buffIcon").GetComponentInChildren<Image> ().fillAmount = 1;
 			currentBuffTimes[stats.player.Buffs.Count-1] = stats.player.Buffs[stats.player.Buffs.Count-1]._duration;
         }

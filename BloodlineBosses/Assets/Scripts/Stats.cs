@@ -6,15 +6,17 @@ public class Stats : MonoBehaviour
 {
     public float _modifiercounter;
     public float _amplify;
+    
 
     //construct our playerstats player
 
-    public PStats player = new PStats("mr2", "Mage", 100f, 0, new List<Spells.SpellType>(), new List<Spells.Spell>());
+    public PStats player = new PStats("mr2", "Mage", 100f, 0, new List<Spells.Spell>(), new List<Spells.Spell>());
 
     
     // Start is called before the first frame update
     void Start()
     {
+        
         this.gameObject.name = player.Name;
     }
 
@@ -64,11 +66,11 @@ public class Stats : MonoBehaviour
         private string _roleclass;
         private float _hp;
         private int _meter;
-        private List<Spells.SpellType> _spells;
+        private List<Spells.Spell> _spells;
         private List<Spells.Spell> _buffs;
 
         //constructor
-        public PStats(string name, string roleclass, float hp, int meter, List<Spells.SpellType> spells, List<Spells.Spell> buffs)
+        public PStats(string name, string roleclass, float hp, int meter, List<Spells.Spell> spells, List<Spells.Spell> buffs)
         {
             _name = name;
             _roleclass = roleclass;
@@ -101,7 +103,7 @@ public class Stats : MonoBehaviour
             get { return _meter; }
             set { _meter = value; }
         }
-        public List<Spells.SpellType> Spells
+        public List<Spells.Spell> Spells
         {
             get { return _spells; }
             set { _spells = Spells; }
