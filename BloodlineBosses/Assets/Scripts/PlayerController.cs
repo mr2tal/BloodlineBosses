@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
 
         GetInput();
         Move();
+		Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.z, 10);
+		Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
+		lookPos = lookPos - transform.position;
+		float angle = Mathf.Atan2(lookPos.y, lookPos.x) * Mathf.Rad2Deg;
+		transform.rotation = Quaternion.LookRotation(VectorMousePoint.MousePoint());
 
     }
     //moves the object in the direction determined times the movespeed times the deltatime

@@ -9,13 +9,17 @@ public class Melee : MonoBehaviour
     bool _isCleave;
     int _meter;
     float _aggro;
-    float _duration = 0.1f;
+    float _duration = 1f;
     float timeAlive = 0f;
+	float orbitSpeed = 1.0f;
+	Transform swordTransform;
+
     Spells.Spell _buff;
+
     // Start is called before the first frame update
     void Start()
     {
-
+		swordTransform = GameObject.Find("Sword(Clone)").transform;
     }
 
     // Update is called once per frame
@@ -25,6 +29,7 @@ public class Melee : MonoBehaviour
         if (timeAlive < _duration)
         {
             timeAlive = timeAlive + Time.deltaTime;
+			//swordTransform.transform.localPosition = Vector3.Slerp(swordTransform.localPosition, new Vector3(1, 0, 0), orbitSpeed);
         }
         else
         {
