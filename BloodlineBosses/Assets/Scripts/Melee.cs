@@ -64,6 +64,7 @@ public class Melee : MonoBehaviour
                     EStats.enemy.Buffs.Add(_buff);
                 }
                 EStats.TakeDamage(_attacker, other.name, _damage, _aggro);
+                
             }
            
         }

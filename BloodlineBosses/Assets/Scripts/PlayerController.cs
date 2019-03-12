@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
         CastingSpell CastingSpell = GetComponent<CastingSpell>();
         if (CastingSpell.isCasting == false)
         {
-
             if (Input.GetKey(KeyCode.W))
             {
                 directions = directions + Vector3.forward;
