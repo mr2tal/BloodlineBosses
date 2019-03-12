@@ -21,7 +21,7 @@ public class Spells : MonoBehaviour
 
         Spell fireballM1 = new Spell(PlayerStats.player.Name, "Fireball", "Projectile", 10, 10f, 2f, 5, 5f, 3f, 1f, true, 1f, ProjectilePrefab, AoePrefab, null);
         Spell frostboltM2 = new Spell(PlayerStats.player.Name, "Frostbolt", "Projectile", 10, 10f, 1f, 10, 5f, 3f, 3f, false, 0f, ProjectilePrefab, null, null);
-        Spell meleeattackQ = new Spell(PlayerStats.player.Name, "meleeattack", "Melee", 20f, 0, 10f, 1f, 1f, false, MeleePrefab, null);
+        Spell meleeattackQ = new Spell(PlayerStats.player.Name, "meleeattack", "Melee", 20f, 0, 10f, 1f, .1f, false, MeleePrefab, null);
         Spell aoeattackE = new Spell(PlayerStats.player.Name, "Aoeattack", "Aoe", 5f, 5, 5f, 2f, 2f, 4f, AoePrefab, null);
         Spell buffR = new Spell(PlayerStats.player.Name, "SelfBuff", "Buff", 0, 0.25f, 3f, 0f, true, 3f, 1f);
         Spell buffProjectileF = new Spell(PlayerStats.player.Name, "BuffProjectile", "Projectile", 10, 0f, 2f, 5, 0f, 3f, 1f, false, 0f, ProjectilePrefab, null, new Spell(PlayerStats.player.Name, "Buff", "Buff", 0, 0.25f, 3f, 0f, false, 0f, 0f));

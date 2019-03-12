@@ -11,7 +11,7 @@ public class Melee : MonoBehaviour
     float _aggro;
     float _duration = 1f;
     float timeAlive = 0f;
-	float orbitSpeed = 1.0f;
+	float orbitSpeed = 600.0f;
 	Transform swordTransform;
 	Transform cubeTransform;
 
@@ -31,10 +31,11 @@ public class Melee : MonoBehaviour
         if (timeAlive < _duration)
         {
             timeAlive = timeAlive + Time.deltaTime;
-			cubeTransform.transform.Rotate ( Vector3.up , (orbitSpeed * Time.deltaTime), Space.Self);
+			cubeTransform.transform.Rotate ( Vector3.forward , (orbitSpeed * Time.deltaTime), Space.Self);
         }
         else
         {
+			cubeTransform.transform.localRotation = Quaternion.identity;
             Destroy(this.gameObject);
         }
 
