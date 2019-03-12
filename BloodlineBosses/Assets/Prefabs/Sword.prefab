@@ -100,8 +100,9 @@ GameObject:
   - component: {fileID: 7443685868928720974}
   - component: {fileID: 4404230496091992535}
   - component: {fileID: 4109486500636051021}
+  - component: {fileID: 6880806258093345636}
   m_Layer: 0
-  m_Name: Broadsword w_ Colliders 1
+  m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -181,6 +182,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44440ab70d6ce1142a3a9d7d8aab151e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!64 &6880806258093345636
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944863090182927607}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 91c58ff4eaaa0094f8640c2ec4c71308, type: 3}
 --- !u!1 &5564912457879274972
 GameObject:
   m_ObjectHideFlags: 0

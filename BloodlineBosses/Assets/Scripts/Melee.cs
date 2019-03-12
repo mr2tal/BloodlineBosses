@@ -13,6 +13,7 @@ public class Melee : MonoBehaviour
     float timeAlive = 0f;
 	float orbitSpeed = 1.0f;
 	Transform swordTransform;
+	Transform cubeTransform;
 
     Spells.Spell _buff;
 
@@ -20,6 +21,7 @@ public class Melee : MonoBehaviour
     void Start()
     {
 		swordTransform = GameObject.Find("Sword(Clone)").transform;
+		cubeTransform = GameObject.Find("Cube").transform;
     }
 
     // Update is called once per frame
@@ -29,7 +31,7 @@ public class Melee : MonoBehaviour
         if (timeAlive < _duration)
         {
             timeAlive = timeAlive + Time.deltaTime;
-			//swordTransform.transform.localPosition = Vector3.Slerp(swordTransform.localPosition, new Vector3(1, 0, 0), orbitSpeed);
+			cubeTransform.transform.Rotate ( Vector3.up , (orbitSpeed * Time.deltaTime), Space.Self);
         }
         else
         {
