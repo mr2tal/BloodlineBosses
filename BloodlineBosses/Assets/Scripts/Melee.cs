@@ -9,13 +9,19 @@ public class Melee : MonoBehaviour
     bool _isCleave;
     int _meter;
     float _aggro;
-    float _duration = 0.1f;
+    float _duration = 1f;
     float timeAlive = 0f;
+	float orbitSpeed = 600.0f;
+	Transform swordTransform;
+	Transform cubeTransform;
+
     Spells.Spell _buff;
+
     // Start is called before the first frame update
     void Start()
     {
-
+		swordTransform = GameObject.Find("Sword(Clone)").transform;
+		cubeTransform = GameObject.Find("Cube").transform;
     }
 
     // Update is called once per frame
@@ -25,9 +31,11 @@ public class Melee : MonoBehaviour
         if (timeAlive < _duration)
         {
             timeAlive = timeAlive + Time.deltaTime;
+			cubeTransform.transform.Rotate ( Vector3.forward , (orbitSpeed * Time.deltaTime), Space.Self);
         }
         else
         {
+			cubeTransform.transform.localRotation = Quaternion.identity;
             Destroy(this.gameObject);
         }
 

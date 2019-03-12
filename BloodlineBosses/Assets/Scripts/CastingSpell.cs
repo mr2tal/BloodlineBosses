@@ -225,6 +225,11 @@ public class CastingSpell : MonoBehaviour
         }
     }
     // instantiates our projectile and sends parameters to the projectile
+	public void parentSetter(Transform newParent)
+	{
+		//Sets "newParent" as the new parent of the object
+		this.transform.SetParent(newParent);
+	}
     void Shoot(int index)
     {
         
@@ -236,7 +241,12 @@ public class CastingSpell : MonoBehaviour
         }
         if (stats.player.Spells[index]._archetype == "Melee")
         {
-            GameObject obj = Instantiate(stats.player.Spells[index]._prefab, transform.position, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+            GameObject obj = Instantiate(stats.player.Spells[index]._prefab, transform.position + transform.up*1, Quaternion.LookRotation(VectorMousePoint.MousePoint() - this.transform.position));
+
+			//This attempts to assign the instantiated object as a child of the player object. Currently finds the player object by name, which is set to "mr2" at runtime.
+			obj.transform.parent = GameObject.Find("Cube").transform;
+			GameObject.Find("Cube").transform.Rotate(new Vector3(90,0,0), Space.Self);
+			//Prints the name of the spell, for debugging, to make sure we've imported the right one to the right hotkey.
             print(stats.player.Spells[index]._name);
             obj.GetComponent<Melee>().RecieveParameters(stats.player.Name, stats.player.Spells[index]._damage, stats.player.Spells[index]._isCleave, stats.player.Spells[index]._meter, stats.player.Spells[index]._aggro, stats.player.Spells[index]._buff);
         }
